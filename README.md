@@ -31,7 +31,7 @@ resources and access restful data with ease.
 
 ## Installation
 
-`meteoer add centiq:crest`
+`meteor add centiq:crest`
 
 ## API
 
