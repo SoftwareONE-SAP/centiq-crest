@@ -50,10 +50,17 @@ Tinytest.add('Crest - Resource', function (test) {
 	 */
 	crest.addResource('posts');
 	crest.addResource('comments');
-	crest.addResource('albums');
-	crest.addResource('photos');
-	crest.addResource('users');
-	crest.addResource('todos');
+
+	/**
+	 * Test array based insertion.
+	 * @type {String}
+	 */
+	crest.addResource([
+		{name: "albums"},
+		{name: "photos"},
+		{name: "users", path: "/accounts"},
+		{name: "todos"}
+	]);
 
 	/**
 	 * Assert there is one new resources

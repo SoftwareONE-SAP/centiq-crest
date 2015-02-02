@@ -109,10 +109,25 @@ Crest.prototype.setHeader = function(key, value) {
  */
 Crest.prototype.addResource = function(name, path) {
 	/**
+	 * Check for an array of resources.
+	 */
+	if(typeof name == 'object' && name.length) {
+		for (var i = name.length - 1; i >= 0; i--) {
+			if(typeof name[i] != 'object') {
+				throw new Meteor.Error("invalid-parameter", "Array of resources must be an array of objects.");
+			}
+
+			this.addResource(name[i].name, name[i].path);
+		};
+
+		return;
+	}
+
+	/**
 	 * Convert the name into an acceptible name
 	 */
 	if(/^[a-z0-9]+$/i.test(name) === false) {
-		throw new Meteor.Error("invalid-resource", "Resource names can only be alpha-numeric.");
+		throw new Meteor.Error("invalid-resource", "Resource names can only be alpha-numeric {" + name + "}.");
 	}
 
 	/**
