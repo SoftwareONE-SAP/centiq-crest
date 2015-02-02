@@ -1,4 +1,7 @@
 
+/**
+ * Test base API Interface
+ */
 Tinytest.add('Crest', function (test) {
 	/**
 	 * Basic Assertions.
@@ -17,7 +20,10 @@ Tinytest.add('Crest', function (test) {
 	test.throws(function(){ new Crest(); }, Meteor.Error);
 });
 
-Tinytest.add('Crest - API', function (test) {
+/**
+ * Test API Resources
+ */
+Tinytest.add('Crest - Resource', function (test) {
 
 	/**
 	 * Create a new Crest object
@@ -71,7 +77,7 @@ Tinytest.add('Crest - API', function (test) {
 /**
  * Test fetching all entities
  */
-Tinytest.addAsync("Crest - API - HTTP Fetch All api.posts.get()", function(test, next){
+Tinytest.addAsync("Crest - API - HTTP Fetch All api.posts.get()", function(test, next){		
 	/**
 	 * Create a new Crest object
 	 * @type {Crest}
@@ -199,7 +205,7 @@ Tinytest.addAsync("Crest - API - HTTP Fetch One api.posts.get(1)", function(test
 });
 
 /**
- * Delete a Resource
+ * POST a Resource
  */
 Tinytest.addAsync("Crest - API - HTTP Create api.posts.create({})", function(test, next){
 
@@ -283,6 +289,46 @@ Tinytest.addAsync("Crest - API - HTTP Fetch One api.posts.remove(1)", function(t
 	}
 
 	crest.posts.remove(1, function(error, response){
+		test.isNull(error);
+		_testServerResponse(response);
+		next();
+	})
+});
+
+/**
+ * Delete a Resource
+ */
+Tinytest.addAsync("Crest - API - HTTP Fetch One api.posts.update(1, {..})", function(test, next){
+	/**
+	 * Create a new Crest object
+	 * @type {Crest}
+	 */
+	var crest = new Crest({
+		base_url: "http://localhost:3002/"
+	});
+
+	/**
+	 * Add a resource
+	 */
+	crest.addResource('posts');
+
+	var _testServerResponse = function(response) {
+
+		test.equal(response.statusCode, 200);
+		test.ok(response.data);
+		test.ok(response.data.title);
+		test.equal(response.data.title, "Updated..");
+	}
+
+	/**
+	 * Server side
+	 */
+	if(Meteor.isServer) {
+		_testServerResponse(crest.posts.update(1, {title: "Updated.."}));
+		return next();
+	}
+
+	crest.posts.update(1, {title: "Updated.."}, function(error, response){
 		test.isNull(error);
 		_testServerResponse(response);
 		next();

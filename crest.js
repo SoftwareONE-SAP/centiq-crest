@@ -54,7 +54,13 @@ Crest = function(options) {
 		 * Enable debug to console support
 		 * @type {Boolean}
 		 */
-		debug : false
+		debug : false,
+
+		/**
+		 * Custom headers for all requests
+		 * @type {Object}
+		 */
+		headers : {}
 	}, options || {});
 }
 
@@ -75,6 +81,23 @@ Crest.prototype.setAuth = function(username, password) {
 	 * @todo Add Basic Auth support
 	 */
 	throw new Meteor.Error("unsupported", "Basic auth is not currently supported.");
+};
+
+/**
+ * Add a custom header to every request
+ * @param {String|Object} 	key   Header key or Object Map
+ * @param {String} 			value Header Value
+ */
+Crest.prototype.setHeader = function(key, value) {
+	if(typeof key == 'object'){
+		for(var _k in key) {
+			this.setHeader(_key, key[_k]);
+		}
+
+		return;
+	}
+
+	this._options.headers[key] = value;
 };
 
 /**

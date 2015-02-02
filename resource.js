@@ -56,6 +56,12 @@ CrestResource.prototype.request = function(method, id, options, asyncCallback) {
 	 if(Meteor.isClient && !asyncCallback)
 	 	throw new Meteor.Error("Callabck required to make restful requests on the client!.");
 
+	/**
+	 * Create a loca
+	 * @type {[type]}
+	 */
+	 var that = this;
+
 	 /**
 	  * Create a new HTTP.call Method
 	  */
@@ -64,6 +70,7 @@ CrestResource.prototype.request = function(method, id, options, asyncCallback) {
 	 	 * We should populate this object with default parameters from the
 	 	 * api context object.
 	 	 */
+	 	headers : that._context.getOption('headers')
 	 }, options/*Override the defaults above*/), asyncCallback);
 };
 
@@ -102,8 +109,24 @@ CrestResource.prototype.list = function(opt_params) {
  * @param  {Number|String} 	id   		Object idnetifier
  * @param  {Object} 		updates 	Object update object.
  */
-CrestResource.prototype.update = function(id, updates) {
+CrestResource.prototype.update = function(id, update, opt_params, opt_callback) {
+	// Single parameter
+	if(!id)
+		throw new Meteor.Error("invalid-parameters", "'id' required to update an object");
 
+	/**
+	 * We must have an update object
+	 */
+	if(!update)
+		throw new Meteor.Error("invalid-parameters", "'update' required to update an object");
+
+	opt_callback 	= typeof opt_params == 'function' 	? opt_params 	: opt_callback;
+	opt_params 		= typeof opt_params != 'object	' 	? {} 			: opt_params;
+
+	// Force the data into the params object
+	opt_params.data = update;
+
+	return this.request("PUT", id, opt_params, opt_callback);
 };
 
 /**
@@ -117,7 +140,7 @@ CrestResource.prototype.create = function(object, opt_params, opt_callback) {
 
 
 	opt_callback 	= typeof opt_params == 'function' 	? opt_params 	: opt_callback;
-	opt_params 		= typeof opt_params != 'object' 	? {} 			: opt_params;
+	opt_params 		= typeof opt_params != 'object	' 	? {} 			: opt_params;
 
 	// Force the data into the params object
 	opt_params.data = object;
