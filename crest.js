@@ -27,9 +27,9 @@ Crest = function(options) {
 	/**
 	 * Resource container
 	 * @private
-	 * @type {Array}
+	 * @type {Object}
 	 */
-	this._resources = [];
+	this._resources = {};
 
 	/**
 	 * Remove any trailing slashes from the base url.
