@@ -43,7 +43,7 @@ Tinytest.add('Crest - Resource', function (test) {
 	/**
 	 * Asser there are no inital resources
 	 */
-	test.equal(crest._resources.length, 0);
+	test.equal(Object.keys(crest._resources).length, 0);
 
 	/**
 	 * Add a resource
