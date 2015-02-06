@@ -4,4 +4,5 @@ node_js:
   - "0.8"
   - "0.10"
 before_install:
+  - "npm install jsonplaceholder"
   - "curl -L http://git.io/ejPSng | /bin/sh"
