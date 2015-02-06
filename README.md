@@ -8,7 +8,7 @@ Crest is a lightweight wrapper package for Meteor's HTTP Library, it provides a 
 In order to install crest you should execute the following command within your Meteoer Project:
 
 ```shell
-meteor install centiq:crest
+meteor add centiq:crest
 ```
 
 ## Quickstart
