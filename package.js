@@ -1,57 +1,86 @@
 Package.describe({
-  // Package Name
+  /**
+   * Package Name
+   * @type {String}
+   */
   name: 'centiq:crest',
 
-  //Package Version
+  /**
+   * Pacakge Version
+   * @type {String}
+   */
   version: '0.0.1',
 
-  // Brief, one-line summary of the package.
-  summary: 'Centiq rest is a generic rest library.',
+  /**
+   * Pacakge summery
+   * @type {String}
+   */
+  summary: '',
 
-  // URL to the Git repository containing the source code for this package.
+  /**
+   * Package git link
+   * @type {String}
+   */
   git: '',
 
-  // Readme file
+  /**
+   * Package documentation
+   *
+   * By default, Meteor will default to using README.md for documentation.
+   * To avoid submitting documentation, set this field to null.
+   * 
+   * @type {String}
+   */
   documentation: 'README.md'
 });
 
 /**
- * Configure package
+ * Package runtime confguration
  */
 Package.onUse(function(api) {
   /**
-   * Expose
+   * Version requirements
    */
   api.versionsFrom('1.0.3.1');
 
   /**
    * Dependancies
    */
-  api.use('http');
   api.use('underscore');
-
-  var both = ['server', 'client'];
-
-  /**
-   * Add server files
-   */
-  api.addFiles('crest.js',    both);
-  api.addFiles('resource.js', both);
+  api.use('http');
 
   /**
-   * Export crest externally
+   * Helper variables
    */
-  api.export([
-    'Crest',
-    'CrestResource'
-  ], both);
+  var both = ['client', 'server'];
+
+  /**
+   * Files
+   */
+  api.addFiles('lib/deep_extend_mixin.js', both);
+  api.addFiles("lib/shared/resource.js", both);
+  api.addFiles("lib/shared/crest.js", both);
+
+  /**
+   * Exports
+   */
+  api.export("Crest");
 });
 
 /**
- * Configure Tests
+ * Package test configuration.
  */
 Package.onTest(function(api) {
+  /**
+   * Dependancies
+   */
   api.use('tinytest');
   api.use('centiq:crest');
-  api.addFiles('crest-tests.js');
+
+  /**
+   * Files
+   */
+  api.addFiles("tests/api.js");
+  api.addFiles("tests/resources.js");
+  api.addFiles("tests/requests.js");
 });
