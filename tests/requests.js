@@ -43,7 +43,6 @@ Tinytest.addAsync("Crest API - Requests", function(test, next){
 	}
 
 	if(Meteor.isClient){
-		console.log("cl")
 		crest.posts.get(function(err, response){
 			if(err)
 				throw err;
@@ -78,7 +77,6 @@ Tinytest.addAsync("Crest API - Requests Single Resource", function(test, next){
 		test.equal(typeof response.headers, typeof []);
 		test.equal(response.headers['content-type'], 'application/json; charset=utf-8');
 		test.equal(typeof response.data, typeof {});
-		console.log(response.data);
 	};
 
 	if(Meteor.isServer){
