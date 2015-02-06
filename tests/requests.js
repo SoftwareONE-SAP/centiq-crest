@@ -53,7 +53,7 @@ Tinytest.addAsync("Crest API - Requests", function(test, next){
 });
 
 /**
- * API Tests
+ * Test a single root level request
  */
 Tinytest.addAsync("Crest API - Requests Single Resource", function(test, next){
 	/**
