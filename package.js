@@ -9,19 +9,19 @@ Package.describe({
    * Pacakge Version
    * @type {String}
    */
-  version: '0.0.1',
+  version: '0.9.0',
 
   /**
    * Pacakge summery
    * @type {String}
    */
-  summary: '',
+  summary: 'Crest is a lightweight wrapper package for Meteor's HTTP Library, it provides a structured interface that allows you to quickly access restful data.',
 
   /**
    * Package git link
    * @type {String}
    */
-  git: '',
+  git: 'https://github.com/Centiq/centiq-crest',
 
   /**
    * Package documentation
