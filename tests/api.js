@@ -57,7 +57,7 @@ Tinytest.add("Crest API", function(test){
 	 *
 	 * note, base_url has the trailing slash stripped off.
 	 */
-	test.equal(crest.getOption('base_url'), 'http://localhost:3002');
+	test.equal(crest._url(), 'http://localhost:3002');
 
 	/**
 	 * Test that that we have a support subject
@@ -68,12 +68,4 @@ Tinytest.add("Crest API", function(test){
 	test.equal('slas' in crest.support.objects, true);
 	test.equal(crest.support.objects.slas, slas);
 	test.equal(crest.support.objects.teams, teams);
-
-	/**
-	 * Make sure params are passed to child resources.
-	 */
-	test.equal(
-		crest.support.objects.slas._options.headers['X-Api-Token'],
-		'some super secret string'
-	);
 });

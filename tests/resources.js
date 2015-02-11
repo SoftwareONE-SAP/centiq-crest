@@ -18,7 +18,8 @@ Tinytest.add("Crest API - Resources - Nesting", function(test){
 	 */
 	var client = new Crest({
 		base_url: "http://localhost:3002/"
-	});
+	},
+	{params : {access_token: "abc123"}});
 
 	/**
 	 * Create resources
@@ -41,6 +42,10 @@ Tinytest.add("Crest API - Resources - Nesting", function(test){
 
 	test.equal(client.support.tickets._url(), "http://localhost:3002/support/tickets");
 	test.equal(client.support.tickets._url("Yhi7-O8NHG"), "http://localhost:3002/support/tickets/Yhi7-O8NHG");
+
+	client.setOption("params", {access_token: "modified_first"});
+	console.log(client.support.getOption('params'))
+	// test.equal(client.support.getOption('params'), "modified_first");
 });
 
 
