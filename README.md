@@ -1,6 +1,9 @@
 # Crest
 
 [![Build Status](https://travis-ci.org/Centiq/centiq-crest.svg?branch=master)](https://travis-ci.org/Centiq/centiq-crest)
+[![Issues](https://img.shields.io/github/issues/Centiq/centiq-crest.svg)](https://github.com/Centiq/centiq-crest/issues)
+[![Forks](https://img.shields.io/github/forks/Centiq/centiq-crest.svg)](https://github.com/Centiq/centiq-crest/fork)
+[![Software License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 Crest is a lightweight wrapper package for Meteor's HTTP Library, it provides a structured interface that allows you to quickly access restful data.
 
