@@ -44,8 +44,7 @@ Tinytest.add("Crest API - Resources - Nesting", function(test){
 	test.equal(client.support.tickets._url("Yhi7-O8NHG"), "http://localhost:3002/support/tickets/Yhi7-O8NHG");
 
 	client.setOption("params", {access_token: "modified_first"});
-	console.log(client.support.getOption('params'))
-	// test.equal(client.support.getOption('params'), "modified_first");
+	test.equal(client.support.getOption('params')['access_token'], "modified_first");
 });
 
 
@@ -79,3 +78,82 @@ Tinytest.add("Crest API - Resources - URL validity", function(test, next){
 	test.equal(crest.posts.shares._url(), "http://localhost:3002/posts/shares", "Sub-resource path without slashes");
 });
 
+/**
+ * Parameters
+ */
+Tinytest.add("Crest API - Resources - Options - Params", function(test){
+	/**
+	 * Create a new Crest Resource
+	 */
+	var crest = new Crest({
+		base_url: "http://localhost:3002/"
+	});
+
+	var initialValue = 'initial';
+
+	/**
+	 * Create an initial resource
+	 */
+	crest.addResource('before');
+	
+	/**
+	 * Set the first paramteter
+	 */
+	crest.param('initialValue', initialValue);
+
+	/**
+	 * After child resource
+	 */
+	crest.before.addResource('after');
+	test.equal(crest.before.param('initialValue'), initialValue);
+	test.equal(crest.before.after.param('initialValue'), initialValue);
+
+	/**
+	 * When we set a parameter on a sub resource, it should not effect any parent resource.
+	 */
+	crest.before.param('initialValue', initialValue + 'modified');
+
+	test.equal(crest.param('initialValue'), initialValue);
+	test.equal(crest.before.param('initialValue'), initialValue + 'modified');
+	test.equal(crest.before.after.param('initialValue'),  initialValue + 'modified');
+});
+
+/**
+ * Parameters
+ */
+Tinytest.add("Crest API - Resources - Options - Headers", function(test){
+	/**
+	 * Create a new Crest Resource
+	 */
+	var crest = new Crest({
+		base_url: "http://localhost:3002/"
+	});
+
+	var initialValue = 'initial';
+
+	/**
+	 * Create an initial resource
+	 */
+	crest.addResource('before');
+	
+	/**
+	 * Set the first paramteter
+	 */
+	crest.header('initialValue', initialValue);
+
+	/**
+	 * After child resource
+	 */
+	crest.before.addResource('after');
+	test.equal(crest.before.header('initialValue'), initialValue);
+	test.equal(crest.before.after.header('initialValue'), initialValue);
+
+	/**
+	 * When we set a header on a sub resource, it should not effect any parent resource.
+	 */
+	crest.before.header('initialValue', initialValue + 'modified');
+
+	test.equal(crest.header('initialValue'), initialValue);
+	test.equal(crest.before.header('initialValue'), initialValue + 'modified');
+	test.equal(crest.before.after.header('initialValue'),  initialValue + 'modified');
+});
