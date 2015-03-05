@@ -28,7 +28,7 @@ Package.describe({
    *
    * By default, Meteor will default to using README.md for documentation.
    * To avoid submitting documentation, set this field to null.
-   * 
+   *
    * @type {String}
    */
   documentation: 'README.md'
@@ -48,11 +48,18 @@ Package.onUse(function(api) {
    */
   api.use('underscore');
   api.use('http');
+  api.use('mongo');
 
   /**
    * Helper variables
    */
   var both = ['client', 'server'];
+
+  /**
+   * Collection for Crest options (internal only)
+   */
+  api.addFiles('lib/collection/server.js', 'server');
+  api.addFiles('lib/collection/client.js', 'client');
 
   /**
    * Files
