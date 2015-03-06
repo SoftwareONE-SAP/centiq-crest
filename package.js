@@ -9,7 +9,7 @@ Package.describe({
    * Pacakge Version
    * @type {String}
    */
-  version: '0.9.0',
+  version: '0.9.1',
 
   /**
    * Pacakge summery
