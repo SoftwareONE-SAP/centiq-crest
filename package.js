@@ -28,7 +28,7 @@ Package.describe({
    *
    * By default, Meteor will default to using README.md for documentation.
    * To avoid submitting documentation, set this field to null.
-   * 
+   *
    * @type {String}
    */
   documentation: 'README.md'
