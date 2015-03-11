@@ -80,7 +80,17 @@ Package.onTest(function(api) {
   /**
    * Files
    */
-  api.addFiles("tests/api.js");
-  api.addFiles("tests/resources.js");
-  api.addFiles("tests/requests.js");
+  // api.addFiles("tests/api.js");
+  // api.addFiles("tests/resources.js");
+  // api.addFiles("tests/requests.js");
+
+  /**
+   * @todo  Check validity of requests.js tests
+   */
+
+  /**
+   * Unit tests
+   */
+  api.addFiles("tests/crest.js");
+  api.addFiles("tests/resource.js");
 });
