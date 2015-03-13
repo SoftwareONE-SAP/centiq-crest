@@ -9,26 +9,26 @@ Package.describe({
    * Pacakge Version
    * @type {String}
    */
-  version: '0.0.1',
+  version: '0.9.0',
 
   /**
    * Pacakge summery
    * @type {String}
    */
-  summary: '',
+  summary: 'Crest is a lightweight rest wrapper package for Meteor\'s HTTP Library.',
 
   /**
    * Package git link
    * @type {String}
    */
-  git: '',
+  git: 'https://github.com/Centiq/centiq-crest',
 
   /**
    * Package documentation
    *
    * By default, Meteor will default to using README.md for documentation.
    * To avoid submitting documentation, set this field to null.
-   * 
+   *
    * @type {String}
    */
   documentation: 'README.md'
@@ -80,7 +80,17 @@ Package.onTest(function(api) {
   /**
    * Files
    */
-  api.addFiles("tests/api.js");
-  api.addFiles("tests/resources.js");
-  api.addFiles("tests/requests.js");
+  // api.addFiles("tests/api.js");
+  // api.addFiles("tests/resources.js");
+  // api.addFiles("tests/requests.js");
+
+  /**
+   * @todo  Check validity of requests.js tests
+   */
+
+  /**
+   * Unit tests
+   */
+  api.addFiles("tests/crest.js");
+  api.addFiles("tests/resource.js");
 });
